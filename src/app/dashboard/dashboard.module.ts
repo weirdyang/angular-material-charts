@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
+import { MiniCardComponent } from '../shared/mini-card/mini-card.component';
+import { DashboardChartModule } from '../charts/dashboard-chart.module';
+import { DashboardComponent } from './dashboard.component';
+import { CardComponent } from '../shared/card/card.component';
+import { OrdersTableComponent } from '../order/orders-table.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -18,19 +17,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
-import { HttpClientModule } from '@angular/common/http';
-import { DashboardModule } from './dashboard/dashboard.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavComponent,
+    MiniCardComponent,
+    DashboardComponent,
+    CardComponent,
+    OrdersTableComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    LayoutModule,
+    CommonModule,
+    DashboardChartModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -39,14 +37,14 @@ import { DashboardModule } from './dashboard/dashboard.module';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    DashboardModule,
-    MatTableModule,
     MatPaginatorModule,
-    MatSortModule,
     MatChipsModule,
-    HttpClientModule
+    MatSortModule,
+    MatTableModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  exports: [
+    DashboardChartModule,
+    DashboardComponent
+  ]
 })
-export class AppModule { }
+export class DashboardModule { }
