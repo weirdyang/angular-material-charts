@@ -1,40 +1,52 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="{{ ( cardLayout | async)?.columns }}" rowHeight="200px">
+  <mat-grid-list cols="{{ ( cardLayout | async)?.columns }}"
+    rowHeight="200px">
     <!-- Cards -->
-    <mat-grid-tile *ngFor="let card of miniCardData" [colspan]="( cardLayout | async )?.miniCard?.cols"
+    <mat-grid-tile *ngFor="let mc of miniCardData"
+      [colspan]="( cardLayout | async )?.miniCard?.cols"
       [rowspan]="( cardLayout | async )?.miniCard?.rows">
-      <cd-mini-card [title]="card.title" [textValue]="card.textValue" [value]="card.value" [color]="card.color"
-        [percentValue]="card.percentValue">This goes into the ng-content slot
-      </cd-mini-card>
+      <cd-mini-card [icon]="mc.icon"
+        [title]="mc.title"
+        [value]="mc.value"
+        [color]="mc.color"
+        [isIncrease]="mc.isIncrease"
+        duration="since last month"
+        [percentValue]="mc.percentValue"
+        [isCurrency]="mc. isCurrency"></cd-mini-card>
     </mat-grid-tile>
     <!--Charts-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
+      [rowspan]="( cardLayout | async )?.chart?.rows">
       <cd-card title="Annual Sales">
         <cd-annual-sales-chart>
         </cd-annual-sales-chart>
       </cd-card>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
+      [rowspan]="( cardLayout | async )?.chart?.rows">
       <cd-card title="Product Sales">
         <cd-product-sales-chart>
         </cd-product-sales-chart>
       </cd-card>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
+      [rowspan]="( cardLayout | async )?.chart?.rows">
       <cd-card title="Sales by Traffic Source">
         <cd-sales-traffic-chart>
         </cd-sales-traffic-chart>
       </cd-card>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
+      [rowspan]="( cardLayout | async )?.chart?.rows">
       <cd-card title="Online Store Sessions by Traffic Source">
         <cd-store-sessions-chart>
         </cd-store-sessions-chart>
       </cd-card>
     </mat-grid-tile>
     <!-- Tables -->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols" [rowspan]="( cardLayout | async )?.table?.rows">
+    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols"
+      [rowspan]="( cardLayout | async )?.table?.rows">
       <cd-card title="Latest Orders">
         <cd-orders-table></cd-orders-table>
       </cd-card>

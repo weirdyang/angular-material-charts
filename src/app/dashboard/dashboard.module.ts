@@ -25,6 +25,7 @@ import { MatChipsModule } from '@angular/material/chips';
     DashboardComponent,
     CardComponent,
     OrdersTableComponent,
+    MiniCardComponent
   ],
   imports: [
     CommonModule,
