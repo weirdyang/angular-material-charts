@@ -16,33 +16,12 @@
         [isCurrency]="mc. isCurrency"></cd-mini-card>
     </mat-grid-tile>
     <!--Charts-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
+    <mat-grid-tile *ngFor="let mc of ( cardLayout | async )?.chart?.data"
+      [colspan]="( cardLayout | async )?.chart?.cols"
       [rowspan]="( cardLayout | async )?.chart?.rows">
-      <cd-card title="Annual Sales">
-        <cd-annual-sales-chart>
-        </cd-annual-sales-chart>
-      </cd-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
-      [rowspan]="( cardLayout | async )?.chart?.rows">
-      <cd-card title="Product Sales">
-        <cd-product-sales-chart>
-        </cd-product-sales-chart>
-      </cd-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
-      [rowspan]="( cardLayout | async )?.chart?.rows">
-      <cd-card title="Sales by Traffic Source">
-        <cd-sales-traffic-chart>
-        </cd-sales-traffic-chart>
-      </cd-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
-      [rowspan]="( cardLayout | async )?.chart?.rows">
-      <cd-card title="Online Store Sessions by Traffic Source">
-        <cd-store-sessions-chart>
-        </cd-store-sessions-chart>
-      </cd-card>
+      <cd-template-card [title]="mc.title"
+        [component]="mc.component">
+      </cd-template-card>
     </mat-grid-tile>
     <!-- Tables -->
     <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols"

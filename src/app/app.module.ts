@@ -20,6 +20,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { ComponentWrapperComponent } from './shared/component-wrapper/component-wrapper.component';
+import { WrapperDirective } from './shared/wrapper.directive';
 
 @NgModule({
   declarations: [
