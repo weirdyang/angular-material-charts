@@ -1,7 +1,7 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[cdWrapperDirective]'
+  selector: '[cdWrapper]'
 })
 export class WrapperDirective {
 

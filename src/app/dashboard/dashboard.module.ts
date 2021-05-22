@@ -17,7 +17,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
-import { TemplateCardComponent } from '../shared/template-card/template-card.component';
 import { ComponentWrapperComponent } from '../shared/component-wrapper/component-wrapper.component';
 import { WrapperDirective } from '../shared/wrapper.directive';
 
@@ -28,7 +27,6 @@ import { WrapperDirective } from '../shared/wrapper.directive';
     CardComponent,
     OrdersTableComponent,
     MiniCardComponent,
-    TemplateCardComponent,
     ComponentWrapperComponent,
     WrapperDirective,
   ],

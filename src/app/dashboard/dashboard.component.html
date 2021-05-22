@@ -19,9 +19,9 @@
     <mat-grid-tile *ngFor="let mc of ( cardLayout | async )?.chart?.data"
       [colspan]="( cardLayout | async )?.chart?.cols"
       [rowspan]="( cardLayout | async )?.chart?.rows">
-      <cd-template-card [title]="mc.title"
-        [component]="mc.component">
-      </cd-template-card>
+      <cd-card [title]="mc.title">
+        <cd-component-wrapper [item]="mc.component"></cd-component-wrapper>
+      </cd-card>
     </mat-grid-tile>
     <!-- Tables -->
     <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols"
