@@ -35,20 +35,4 @@ export class OrdersTableDataSource extends DataSource<Order> {
             throw Error('Please set the paginator and sort on the data source before connecting.');
         }
     }
-    // connect(): Observable<Order[]> {
-    //     const dataMutations = [
-    //         of('Initial load'),
-    //         this.paginator?.page,
-    //         this.sort?.sortChange
-    //     ];
-
-    //     return merge([...dataMutations]).pipe(mergeMap((): Observable<Order[]> => {
-    //         return this.orderService.getOrders(
-    //             this.paginator!.pageIndex * this.paginator!.pageSize,
-    //             this.paginator!.pageSize,
-    //             this.sort!.active,
-    //             this.sort!.direction
-    //         );
-    //     }));
-    // }
 }

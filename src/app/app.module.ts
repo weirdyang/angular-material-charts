@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +19,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { OrderDashComponent } from './order/order-dash/order-dash.component';
+import { NewOrderTableComponent } from './order/order-dash/new-order-table/new-order-table.component';
+import { OrderDashModule } from './order/order-dash/order-dash.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import { DashboardModule } from './dashboard/dashboard.module';
     MatPaginatorModule,
     MatSortModule,
     MatChipsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgApexchartsModule,
+    OrderDashModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'cd-annual-sales-chart',
   templateUrl: './annual-sales-chart.component.html',
-  styleUrls: ['./annual-sales-chart.component.scss']
+  styleUrls: ['./annual-sales-chart.component.scss'],
 })
 export class AnnualSalesChartComponent implements OnInit {
 

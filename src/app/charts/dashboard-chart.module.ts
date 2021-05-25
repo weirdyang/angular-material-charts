@@ -6,7 +6,6 @@ import { AnnualSalesChartComponent } from './annual-sales-chart/annual-sales-cha
 import { SalesTrafficChartComponent } from './sales-traffic-chart/sales-traffic-chart.component';
 import { ProductSalesChartComponent } from './product-sales-chart/product-sales-chart.component';
 
-
 @NgModule({
   declarations: [
     StoreSessionsChartComponent,
@@ -15,7 +14,7 @@ import { ProductSalesChartComponent } from './product-sales-chart/product-sales-
     ProductSalesChartComponent],
   imports: [
     CommonModule,
-    ChartsModule
+    ChartsModule,
   ],
   exports: [
     CommonModule,
