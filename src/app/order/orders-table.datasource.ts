@@ -8,9 +8,6 @@ import { Order } from './order';
 import { OrderService } from './order.service';
 
 export class OrdersTableDataSource extends DataSource<Order> {
-    disconnect(collectionViewer: CollectionViewer): void {
-
-    }
     paginator: MatPaginator | undefined;
     sort: MatSort | undefined;
     data!: Order[];
@@ -35,6 +32,7 @@ export class OrdersTableDataSource extends DataSource<Order> {
             throw Error('Please set the paginator and sort on the data source before connecting.');
         }
     }
-    /**
+    disconnect(collectionViewer: CollectionViewer): void {
 
+    }
 }
