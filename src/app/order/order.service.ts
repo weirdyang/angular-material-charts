@@ -27,7 +27,24 @@ export class OrderService {
       catchError(this.handleError)
     );
   }
-
+  getLastOrders(records: number): Observable<Order[]> {
+    return this.http.get<Order[]>(this.ordersUrl).pipe((
+      map((response) => {
+        return response
+        .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+        .slice(0, records);
+      })
+    ))
+  }
+  getRandomOrders(records: number): Observable<Order[]> {
+    return this.http.get<Order[]>(this.ordersUrl).pipe((
+      map((response) => {
+        return response
+        .sort(() => Math.random() - 0.5)
+        .slice(0, records);
+      })
+    ))
+  }
   getOrderCount(): Observable<number> {
     return this.http.get<Order[]>(this.ordersUrl).pipe(
       map((response) => {

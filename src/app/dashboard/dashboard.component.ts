@@ -8,18 +8,8 @@ import { AnnualSalesChartComponent } from '../charts/annual-sales-chart/annual-s
 import { ProductSalesChartComponent } from '../charts/product-sales-chart/product-sales-chart.component';
 import { SalesTrafficChartComponent } from '../charts/sales-traffic-chart/sales-traffic-chart.component';
 import { StoreSessionsChartComponent } from '../charts/store-sessions-chart/store-sessions-chart.component';
+import { LayoutContainer } from '../shared/interfaces/layout';
 
-interface LayoutOutContainer {
-  columns: number;
-  miniCard: LayoutItem;
-  chart: LayoutItem;
-  table: LayoutItem;
-}
-interface LayoutItem {
-  cols: number;
-  rows: number;
-  data: any[];
-}
 @Component({
   selector: 'cd-dashboard',
   templateUrl: './dashboard.component.html',
@@ -36,7 +26,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  cardLayout: Observable<LayoutOutContainer> = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).pipe(
+  cardLayout: Observable<LayoutContainer> = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).pipe(
     map(({ matches }) => {
       if (matches) {
         return {

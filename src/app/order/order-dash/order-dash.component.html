@@ -1,0 +1,30 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="{{ ( cardLayout | async)?.columns }}"
+    rowHeight="200px">
+    <!-- Cards -->
+    <mat-grid-tile *ngFor="let mc of ( cardLayout | async )?.miniCard?.data"
+      [colspan]="( cardLayout | async )?.miniCard?.cols"
+      [rowspan]="( cardLayout | async )?.miniCard?.rows">
+      <cd-card [title]="mc.title">
+        <p> {{ mc }} </p>>
+      </cd-card>
+    </mat-grid-tile>
+    <!--Charts-->
+    <mat-grid-tile *ngFor="let mc of ( cardLayout | async )?.chart?.data"
+      [colspan]="( cardLayout | async )?.chart?.cols"
+      [rowspan]="( cardLayout | async )?.chart?.rows">
+      <cd-card [title]="mc.title">
+        <cd-component-wrapper [item]="mc.component"></cd-component-wrapper>
+      </cd-card>
+    </mat-grid-tile>
+    <!-- Tables -->
+    <mat-grid-tile *ngFor="let mc of ( cardLayout | async )?.table?.data"
+      [colspan]="( cardLayout | async )?.table?.cols"
+      [rowspan]="( cardLayout | async )?.table?.rows">
+      <cd-card [title]="mc.title">
+
+      </cd-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

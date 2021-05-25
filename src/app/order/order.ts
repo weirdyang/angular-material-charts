@@ -20,4 +20,12 @@ export class Order {
         this.paymentMode = paymentMode;
 
     }
+
 }
+export interface Order {
+    getDate(): Date;
+}
+
+Order.prototype.getDate = function parseDate() {
+    return new Date(this.date);
+};
