@@ -22,7 +22,6 @@ import { NewOrderTableComponent } from './new-order-table/new-order-table.compon
     OrderPieChartComponent,
     OrderColorChartComponent,
     OrderDashComponent,
-    NewOrderTableComponent
   ],
   imports: [
     CommonModule,

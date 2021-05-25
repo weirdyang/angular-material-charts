@@ -9,7 +9,7 @@ import { OrderService } from './order.service';
 
 export class OrdersTableDataSource extends DataSource<Order> {
     disconnect(collectionViewer: CollectionViewer): void {
-        throw new Error('Method not implemented.');
+
     }
     paginator: MatPaginator | undefined;
     sort: MatSort | undefined;
@@ -35,4 +35,6 @@ export class OrdersTableDataSource extends DataSource<Order> {
             throw Error('Please set the paginator and sort on the data source before connecting.');
         }
     }
+    /**
+
 }
