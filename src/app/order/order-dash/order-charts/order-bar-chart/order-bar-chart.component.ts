@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Label } from 'ng2-charts';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { interval, Observable, of, Subscription, zip } from 'rxjs';
+import { groupBy, map, mergeMap, toArray } from 'rxjs/operators';
 import { Order } from 'src/app/order/order';
 import { OrderService } from 'src/app/order/order.service';
 import { IObjectKeys } from 'src/app/shared/interfaces/layout';
@@ -16,7 +16,7 @@ class PaymentCount implements IObjectKeys {
   templateUrl: './order-bar-chart.component.html',
   styleUrls: ['./order-bar-chart.component.scss']
 })
-export class OrderBarChartComponent implements OnInit {
+export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -39,23 +39,22 @@ export class OrderBarChartComponent implements OnInit {
     label: "Total Payment Mode Count",
     data: [],
   }]
+  subscription!: Subscription
 
   constructor(private orderService: OrderService) { }
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+  ngAfterViewInit(): void {
+    this.getDataSource();
+  }
 
   private orders: Order[] = [];
 
   ngOnInit() {
-    const orders = this.getInitialData();
-    orders
-      .subscribe({
-        next: items => {
-          this.processOrders(items);
-        },
-        error: err => console.log(err),
-        complete: () => setInterval(() => this.getRandomData(10), 10000)
-      })
 
   }
+
   getColors(): any[] {
     return [{
       backgroundColor: [
@@ -71,12 +70,7 @@ export class OrderBarChartComponent implements OnInit {
         '#6a3d9a']
     }]
   }
-  // getRandomData(): Observable<Order[]> {
-  //   return this.orderService.getRandomOrders(10)
-  //   .subscribe(
 
-  //   })
-  // }
   processOrders(orders: Order[]): void {
     const labels = this.getLabels(orders);
     const totals = this.getTotal(orders);
@@ -92,7 +86,33 @@ export class OrderBarChartComponent implements OnInit {
     this.barChartColors = this.getColors();
     console.log(this.barChartData);
   }
-
+  getDataSource() {
+    const data: any[] = [];
+    const labels: string[] = [];
+    this.orderService.getRandomOrders(10)
+      .pipe(
+        mergeMap(res => res),
+        groupBy(order => order.paymentMode),
+        mergeMap(group => zip(of(group.key), group.pipe(toArray())))
+      ).subscribe({
+        next: (val) => {
+          data.push(val[1].length);
+          labels.push(val[0])
+        },
+        error: console.error,
+        complete: () => {
+          this.barChartData = [{
+            label: "payment modes count",
+            data: data
+          }]
+          this.barChartLabels = labels;
+          this.barChartColors = this.getColors();
+          this.subscription = interval(1000).subscribe({
+            next: () => this.getDataSource()
+          })
+        }
+      });
+  }
   getRandomData(records: number) {
     return this.orderService.getRandomOrders(records)
       .subscribe({

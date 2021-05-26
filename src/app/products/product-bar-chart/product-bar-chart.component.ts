@@ -30,7 +30,7 @@ export class ProductBarChartComponent implements OnInit, AfterViewInit, OnDestro
   subscription!: Subscription;
 
   constructor(private orderService: OrderService) {
-    this.setColorScheme(defaultColor);
+
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -45,6 +45,7 @@ export class ProductBarChartComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngOnInit(): void {
+    this.setColorScheme(defaultColor);
     this.getDataSource();
   }
   setColorScheme(name: string) {
