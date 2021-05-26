@@ -1,5 +1,5 @@
 <div class="chartContainer">
-    <ngx-charts-bar-vertical-stacked
+    <ngx-charts-bar-vertical-stacked [legendTitle]="''"
         [scheme]="colorScheme"
         [results]="multi"
         [gradient]="gradient"
@@ -12,6 +12,7 @@
         [yAxisLabel]="yAxisLabel"
         [animations]="animations"
         (select)="onSelect($event)"
-        [xAxisTickFormatting]="formatDate">
+        [xAxisTickFormatting]="formatDate"
+        [barPadding]="0">
     </ngx-charts-bar-vertical-stacked>
 </div>
