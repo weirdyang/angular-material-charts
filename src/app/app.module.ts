@@ -20,9 +20,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { OrderDashComponent } from './order/order-dash/order-dash.component';
-import { NewOrderTableComponent } from './order/order-dash/new-order-table/new-order-table.component';
 import { OrderDashModule } from './order/order-dash/order-dash.module';
+import { ProductModule } from './products/product.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +48,8 @@ import { OrderDashModule } from './order/order-dash/order-dash.module';
     MatChipsModule,
     HttpClientModule,
     NgApexchartsModule,
-    OrderDashModule
+    OrderDashModule,
+    ProductModule
   ],
   providers: [],
   bootstrap: [AppComponent]
