@@ -7,7 +7,7 @@
       [colspan]="( cardLayout | async )?.miniCard?.cols"
       [rowspan]="( cardLayout | async )?.miniCard?.rows">
       <cd-card [title]="mc.title">
-        <p> {{ mc }} </p>
+        <cd-component-wrapper [item]="mc.component"></cd-component-wrapper>
       </cd-card>
     </mat-grid-tile>
     <!--Charts-->

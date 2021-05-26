@@ -18,6 +18,7 @@ import { RevenueCalculatorComponent } from './revenue-calculator/revenue-calcula
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import { ProductStackedBarComponent } from './product-stacked-bar/product-stacked-bar.component';
+import { LightStatusComponent } from './light-status/light-status.component';
 
 
 
@@ -29,7 +30,8 @@ import { ProductStackedBarComponent } from './product-stacked-bar/product-stacke
     ProductDashboardComponent,
     ProductNumberCardComponent,
     RevenueCalculatorComponent,
-    ProductStackedBarComponent
+    ProductStackedBarComponent,
+    LightStatusComponent
   ],
   imports: [
     SharedModule,

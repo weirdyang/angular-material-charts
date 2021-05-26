@@ -14,8 +14,8 @@ export class RevenueCalculatorComponent implements OnInit, OnDestroy {
 
   colorScheme?: Color;
   schemeType: ScaleType = ScaleType.Linear
-  maxReference: number = 800000;
-  minReference: number = 500000;
+  maxReference: number = 90000;
+  minReference: number = 45000;
   showGridLines = true;
   showLegend = true;
   xAxisLabel = 'Time'

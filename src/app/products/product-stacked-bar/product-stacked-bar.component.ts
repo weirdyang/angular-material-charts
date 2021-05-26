@@ -1,3 +1,4 @@
+import { ContentObserver } from '@angular/cdk/observers';
 import { Component, OnInit } from '@angular/core';
 import { colorSets, MultiSeries, Color } from '@swimlane/ngx-charts';
 import { interval, Subscription } from 'rxjs';
@@ -16,9 +17,9 @@ export class ProductStackedBarComponent implements OnInit {
   gradient: boolean = false;
   showLegend: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Country';
+  xAxisLabel: string = 'Date';
   showYAxisLabel: boolean = true;
-  yAxisLabel: string = 'Population';
+  yAxisLabel: string = 'Production';
   animations: boolean = true;
   seed = 2014;
   colorScheme?: Color;
@@ -27,6 +28,10 @@ export class ProductStackedBarComponent implements OnInit {
   constructor() {
     this.multi = this.getData();
     this.setColorScheme(defaultColor);
+  }
+  formatDate(date: Date) {
+    const monday = new Date(date);
+    return monday.toDateString();
   }
   ngOnInit(): void {
     this.subscription = interval(1500).subscribe(() => this.multi = this.updateData());

@@ -9,6 +9,7 @@ import { ProductNumberCardComponent } from '../product-number-card/product-numbe
 import { RevenueCalculatorComponent } from '../revenue-calculator/revenue-calculator.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { ProductStackedBarComponent } from '../product-stacked-bar/product-stacked-bar.component';
+import { LightStatusComponent } from '../light-status/light-status.component';
 
 @Component({
   selector: 'cd-product-dashboard',
@@ -38,7 +39,7 @@ export class ProductDashboardComponent {
       if (matches) {
         return {
           columns: 1,
-          miniCard: { cols: 1, rows: 1, data: [1, 2, 3, 4] },
+          miniCard: { cols: 1, rows: 2, data: [{ title: "Light status", component: LightStatusComponent }] },
           chart: {
             cols: 1, rows: 2, data:
               this.chartSetup
@@ -49,7 +50,7 @@ export class ProductDashboardComponent {
 
       return {
         columns: 4,
-        miniCard: { cols: 1, rows: 1, data: [1, 2, 3, 4] },
+        miniCard: { cols: 4, rows: 2, data: [{ title: "Light status", component: LightStatusComponent }] },
         chart: {
           cols: 2, rows: 2, data:
             this.chartSetup
