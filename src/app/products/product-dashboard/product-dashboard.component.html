@@ -1,4 +1,4 @@
-<div class="grid-container dark">
+<div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
   <mat-grid-list cols="{{ ( cardLayout | async)?.columns }}"
     rowHeight="200px">
@@ -24,7 +24,7 @@
       [colspan]="( cardLayout | async )?.table?.cols"
       [rowspan]="( cardLayout | async )?.table?.rows">
       <cd-card [title]="mc.title">
-
+        <cd-component-wrapper [item]="mc.component"></cd-component-wrapper>
       </cd-card>
     </mat-grid-tile>
   </mat-grid-list>

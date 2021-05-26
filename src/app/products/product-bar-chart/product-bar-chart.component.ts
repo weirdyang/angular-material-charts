@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild, } from '@angular/core';
 import { colorSets } from '@swimlane/ngx-charts';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 import { OrderService } from 'src/app/order/order.service';
@@ -14,7 +14,7 @@ import { interval, of, Subscription, zip } from 'rxjs';
   styleUrls: ['./product-bar-chart.component.scss']
 })
 
-export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
+export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContentInit {
   single: any[] = [];
   showXAxis = true;
   showYAxis = true;
@@ -26,29 +26,18 @@ export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContent
   yAxisLabel = 'Count';
   colorScheme: any;
   subscription!: Subscription;
-  view: [number, number] = [300, 300];
-  @ViewChild('ContainerRef') container!: ElementRef<HTMLElement>;
+  view: [number, number] | undefined;
   constructor(private orderService: OrderService) {
-
-  }
-  ngAfterViewInit(): void {
-    console.log(this.container);
-    console.log(this.container.nativeElement.offsetWidth, 'offset width');
-    const newView: [number, number] = [this.container.nativeElement.offsetWidth, 300];
-    this.view = newView;
-
-    const test = of(this.container).subscribe((ele) => console.log(ele.nativeElement.offsetWidth));
-
-  }
-  ngAfterContentInit(): void {
-
     this.setColorScheme(defaultColor);
 
   }
 
+
+  ngAfterContentInit(): void {
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-
   }
 
 

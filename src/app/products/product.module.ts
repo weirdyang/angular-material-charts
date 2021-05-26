@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ProductBarChartComponent } from './product-bar-chart/product-bar-chart.component';
 import { ProductGaugeChartComponent } from './product-gauge-chart/product-gauge-chart.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { ProductPieChartComponent } from './product-pie-chart/product-pie-chart.component';
 import { ProductDashboardComponent } from './product-dashboard/product-dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -14,6 +13,11 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { SharedModule } from '../shared/shared.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductNumberCardComponent } from './product-number-card/product-number-card.component';
+import { RevenueCalculatorComponent } from './revenue-calculator/revenue-calculator.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+import { ProductStackedBarComponent } from './product-stacked-bar/product-stacked-bar.component';
 
 
 
@@ -22,8 +26,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductBarChartComponent,
     ProductGaugeChartComponent,
     ProductCardComponent,
-    ProductPieChartComponent,
-    ProductDashboardComponent
+    ProductDashboardComponent,
+    ProductNumberCardComponent,
+    RevenueCalculatorComponent,
+    ProductStackedBarComponent
   ],
   imports: [
     SharedModule,
@@ -35,7 +41,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     LayoutModule,
     NgxChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSliderModule,
+    FormsModule
   ]
 })
 export class ProductModule { }

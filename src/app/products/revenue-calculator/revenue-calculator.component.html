@@ -1,0 +1,36 @@
+<mat-slider [(ngModel)]="maxReference"
+    [step]="100"
+    [min]="minReference"
+    [max]="100000"
+    (change)="refLines= calculateReferences()">
+</mat-slider>
+Max Threshold: {{ maxReference }}
+<br />
+<mat-slider [(ngModel)]="minReference"
+    [step]="100"
+    [min]="0"
+    [max]="maxReference"
+    (change)="refLines = calculateReferences()">
+</mat-slider>
+Min Threshold: {{ minReference }}
+<br />
+<div class="chartContainer">
+    <ngx-charts-line-chart [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [yAxis]="true"
+        [xAxis]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [yScaleMax]="yScaleMax"
+        [results]="multi"
+        [legend]="showLegend"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [timeline]="timeline"
+        [showGridLines]="showGridLines"
+        [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
+        [referenceLines]="refLines">
+    </ngx-charts-line-chart>
+</div>
