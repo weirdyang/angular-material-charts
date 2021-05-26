@@ -19,7 +19,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { NgApexchartsModule } from 'ng-apexcharts';
 import { OrderDashModule } from './order/order-dash/order-dash.module';
 import { ProductModule } from './products/product.module';
 
@@ -47,7 +46,6 @@ import { ProductModule } from './products/product.module';
     MatSortModule,
     MatChipsModule,
     HttpClientModule,
-    NgApexchartsModule,
     OrderDashModule,
     ProductModule
   ],

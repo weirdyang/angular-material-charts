@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild, } from '@angular/core';
 import { colorSets } from '@swimlane/ngx-charts';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 import { OrderService } from 'src/app/order/order.service';
@@ -14,7 +14,7 @@ import { interval, of, Subscription, zip } from 'rxjs';
   styleUrls: ['./product-bar-chart.component.scss']
 })
 
-export class ProductBarChartComponent implements OnInit, OnDestroy {
+export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContentInit {
   single: any[] = [];
   showXAxis = true;
   showYAxis = true;
@@ -26,19 +26,22 @@ export class ProductBarChartComponent implements OnInit, OnDestroy {
   yAxisLabel = 'Count';
   colorScheme: any;
   subscription!: Subscription;
-
+  view: [number, number] | undefined;
   constructor(private orderService: OrderService) {
+    this.setColorScheme(defaultColor);
 
+  }
+
+
+  ngAfterContentInit(): void {
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-
   }
 
 
   ngOnInit(): void {
-    this.setColorScheme(defaultColor);
     this.getDataSource();
     this.subscription = interval(1000).subscribe({
       next: () => this.getDataSource()
@@ -74,3 +77,5 @@ export class ProductBarChartComponent implements OnInit, OnDestroy {
     }, {})
   }
 }
+
+

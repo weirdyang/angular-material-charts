@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductPieChartComponent } from './product-pie-chart.component';
+import { ProductStackedBarComponent } from './product-stacked-bar.component';
 
-describe('ProductPieChartComponent', () => {
-  let component: ProductPieChartComponent;
-  let fixture: ComponentFixture<ProductPieChartComponent>;
+describe('ProductStackedBarComponent', () => {
+  let component: ProductStackedBarComponent;
+  let fixture: ComponentFixture<ProductStackedBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductPieChartComponent ]
+      declarations: [ ProductStackedBarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductPieChartComponent);
+    fixture = TestBed.createComponent(ProductStackedBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
