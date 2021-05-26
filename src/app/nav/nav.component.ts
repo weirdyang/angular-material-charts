@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { ThemeService } from '../core/services/theme.service';
+import { HandsetService } from '../core/services/handset.service';
 
 @Component({
   selector: 'cd-nav',
@@ -17,13 +18,16 @@ export class NavComponent implements OnInit {
       map(result => result.matches),
       shareReplay()
     );
-  isDarkTheme!: Observable<boolean>;
+  isDarkTheme$!: Observable<boolean>;
 
-  constructor(private breakpointObserver: BreakpointObserver, private themeService: ThemeService) {
+  constructor(private breakpointObserver: BreakpointObserver,
+    private themeService: ThemeService,
+    private handsetService: HandsetService) {
 
   }
   ngOnInit() {
-    this.isDarkTheme = this.themeService.isDarkTheme;
+    this.isDarkTheme$ = this.themeService.isDarkTheme;
+    this.isHandset$.subscribe((val) => this.handsetService.setHandset(val))
   }
   toggleDarkTheme(checked: boolean) {
     this.themeService.setDarkTheme(checked);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HandsetService } from './core/services/handset.service';
 import { ThemeService } from './core/services/theme.service';
 
 @Component({
@@ -9,10 +10,12 @@ import { ThemeService } from './core/services/theme.service';
 })
 export class AppComponent implements OnInit {
   isDarkTheme!: Observable<boolean>;
+  isHandset!: Observable<boolean>;
 
-  constructor(private themeService: ThemeService) { }
+  constructor(private themeService: ThemeService, private handsetService: HandsetService) { }
 
   ngOnInit() {
     this.isDarkTheme = this.themeService.isDarkTheme;
+    this.isHandset = this.handsetService.isHandset;
   }
 }

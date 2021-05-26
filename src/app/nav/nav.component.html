@@ -22,7 +22,7 @@
       </button>
       <span>chart-dash</span>
       <span class="spacer"></span>
-      <mat-slide-toggle [checked]="isDarkTheme | async"
+      <mat-slide-toggle [checked]="isDarkTheme$ | async"
         (change)="toggleDarkTheme($event.checked)">Dark theme</mat-slide-toggle>
     </mat-toolbar>
     <router-outlet></router-outlet>
