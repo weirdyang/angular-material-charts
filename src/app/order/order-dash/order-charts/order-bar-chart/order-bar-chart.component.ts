@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Label } from 'ng2-charts';
 import { interval, Observable, of, Subscription, zip } from 'rxjs';
@@ -16,7 +16,7 @@ class PaymentCount implements IObjectKeys {
   templateUrl: './order-bar-chart.component.html',
   styleUrls: ['./order-bar-chart.component.scss']
 })
-export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy {
+export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy, AfterContentInit {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -34,18 +34,23 @@ export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy 
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
-  public barChartColors: any[] = [];
+  public barChartColors: any[] = [{
+    backgroundColor: []
+  }];
   public barChartData: ChartDataSets[] = [{
     label: "Total Payment Mode Count",
     data: [],
   }]
   subscription!: Subscription
 
-  constructor(private orderService: OrderService) {
+  constructor(private orderService: OrderService, private changeDetector: ChangeDetectorRef) {
     this.getDataSource();
     this.subscription = interval(1000).subscribe({
       next: () => this.getDataSource()
     });
+  }
+  ngAfterContentInit(): void {
+
   }
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();

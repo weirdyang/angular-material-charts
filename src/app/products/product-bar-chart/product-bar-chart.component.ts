@@ -32,6 +32,9 @@ export class ProductBarChartComponent implements OnInit, AfterViewInit, OnDestro
   constructor(private orderService: OrderService, private changeDetector: ChangeDetectorRef) {
     this.setColorScheme(defaultColor);
     this.getDataSource();
+    this.subscription = interval(1000).subscribe({
+      next: () => this.getDataSource()
+    })
   }
   ngAfterContentChecked(): void {
 
@@ -42,11 +45,8 @@ export class ProductBarChartComponent implements OnInit, AfterViewInit, OnDestro
 
   }
 
-
   ngAfterViewInit(): void {
-    this.subscription = interval(1000).subscribe({
-      next: () => this.getDataSource()
-    })
+
   }
 
   ngOnInit(): void {
