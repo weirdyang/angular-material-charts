@@ -11,10 +11,12 @@
       </cd-card>
     </mat-grid-tile>
     <!--Charts-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
+    <!--Charts-->
+    <mat-grid-tile *ngFor="let mc of ( cardLayout | async )?.chart?.data"
+      [colspan]="( cardLayout | async )?.chart?.cols"
       [rowspan]="( cardLayout | async )?.chart?.rows">
-      <cd-card title="Payment mode count">
-        <cd-product-bar-chart></cd-product-bar-chart>
+      <cd-card [title]="mc.title">
+        <cd-component-wrapper [item]="mc.component"></cd-component-wrapper>
       </cd-card>
     </mat-grid-tile>
     <!-- Tables -->
