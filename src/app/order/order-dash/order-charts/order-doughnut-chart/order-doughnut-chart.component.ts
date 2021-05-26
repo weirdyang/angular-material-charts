@@ -55,9 +55,11 @@ export class OrderDoughnutChartComponent implements OnInit, OnDestroy, AfterView
       ctx.save();
     }
   }];
-  constructor() { }
-  ngAfterViewInit(): void {
+  constructor() {
     this.setUp();
+  }
+  ngAfterViewInit(): void {
+
   }
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
