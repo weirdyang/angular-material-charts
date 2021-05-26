@@ -41,20 +41,23 @@ export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy 
   }]
   subscription!: Subscription
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService) {
+    this.getDataSource();
+    this.subscription = interval(1000).subscribe({
+      next: () => this.getDataSource()
+    });
+  }
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
   ngAfterViewInit(): void {
-    this.subscription = interval(1000).subscribe({
-      next: () => this.getDataSource()
-    });
+
   }
 
   private orders: Order[] = [];
 
   ngOnInit() {
-    this.getDataSource();
+
   }
 
   getColors(): any[] {
