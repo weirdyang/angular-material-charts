@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { colorSets } from '@swimlane/ngx-charts';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 import { OrderService } from 'src/app/order/order.service';
@@ -16,7 +16,7 @@ import { ScaleType } from 'chart.js';
   styleUrls: ['./product-bar-chart.component.scss']
 })
 
-export class ProductBarChartComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProductBarChartComponent implements OnInit, AfterViewInit, OnDestroy, AfterContentChecked {
   single: any[] = [];
   showXAxis = true;
   showYAxis = true;
@@ -29,8 +29,13 @@ export class ProductBarChartComponent implements OnInit, AfterViewInit, OnDestro
   colorScheme: any;
   subscription!: Subscription;
 
-  constructor(private orderService: OrderService) {
+  constructor(private orderService: OrderService, private changeDetector: ChangeDetectorRef) {
+    this.setColorScheme(defaultColor);
+    this.getDataSource();
+  }
+  ngAfterContentChecked(): void {
 
+    // this.changeDetector.detectChanges();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -45,8 +50,7 @@ export class ProductBarChartComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngOnInit(): void {
-    this.setColorScheme(defaultColor);
-    this.getDataSource();
+
   }
   setColorScheme(name: string) {
     this.colorScheme = colorSets.find(s => s.name === name);
