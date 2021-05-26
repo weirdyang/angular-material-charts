@@ -51,7 +51,7 @@ export class LightStatusComponent implements OnInit {
       Math.floor(Math.random() * 30),
       Math.floor(Math.random() * 24),
       Math.floor(Math.random() * 60),
-      Math.floor(Math.random() * 10))
+      Math.floor(Math.random() * 60))
 
     if (this.multi.length > this.maxLength)
       this.multi.shift()

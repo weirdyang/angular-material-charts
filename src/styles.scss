@@ -1,8 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import './styles/material-theme';
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+ ;}
+main {
+  min-height: 100vh
+}
 .chartContainer{
     height: 100%;
     display: flex;
@@ -18,6 +23,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         max-height: 300px;
         width: 300;
     }
+}
+.handset-mode {
+  .chart-legend {
+    display: none;
+  }
 }
 .dark {
     /**
