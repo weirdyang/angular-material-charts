@@ -21,11 +21,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { OrderDashModule } from './order/order-dash/order-dash.module';
 import { ProductModule } from './products/product.module';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { WelcomeComponent } from './welcome/welcome.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { ProductModule } from './products/product.module';
     MatChipsModule,
     HttpClientModule,
     OrderDashModule,
-    ProductModule
+    ProductModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
