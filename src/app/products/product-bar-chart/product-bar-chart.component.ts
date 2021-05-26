@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { colorSets } from '@swimlane/ngx-charts';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 import { OrderService } from 'src/app/order/order.service';
 import { defaultColor } from '../config';
 import { Order } from '../../order/order';
-import { of, zip } from 'rxjs';
+import { interval, of, Subscription, zip } from 'rxjs';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { ScaleType } from 'chart.js';
 
@@ -16,7 +16,7 @@ import { ScaleType } from 'chart.js';
   styleUrls: ['./product-bar-chart.component.scss']
 })
 
-export class ProductBarChartComponent implements OnInit {
+export class ProductBarChartComponent implements OnInit, AfterViewInit, OnDestroy {
   single: any[] = [];
   showXAxis = true;
   showYAxis = true;
@@ -27,13 +27,33 @@ export class ProductBarChartComponent implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'Count';
   colorScheme: any;
+  subscription!: Subscription;
 
   constructor(private orderService: OrderService) {
-    this.setColorScheme('cool');
+    this.setColorScheme(defaultColor);
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+
+  }
+
+
+  ngAfterViewInit(): void {
+    this.subscription = interval(1000).subscribe({
+      next: () => this.getDataSource()
+    })
   }
 
   ngOnInit(): void {
-    // setTimeout(() => this.setColorScheme(defaultColor));
+    this.getDataSource();
+  }
+  setColorScheme(name: string) {
+    this.colorScheme = colorSets.find(s => s.name === name);
+  }
+  onSelect(event: Event) {
+    console.log(event);
+  }
+  getDataSource() {
     const data: any[] = [];
     this.orderService.getRandomOrders(10)
       .pipe(
@@ -47,12 +67,6 @@ export class ProductBarChartComponent implements OnInit {
         error: console.error,
         complete: () => this.single = [...data]
       });
-  }
-  setColorScheme(name: string) {
-    this.colorScheme = colorSets.find(s => s.name === name);
-  }
-  onSelect(event: Event) {
-    console.log(event);
   }
   groupByProperty(prop: string, array: any[]) {
     return array.reduce((acc, value) => {
