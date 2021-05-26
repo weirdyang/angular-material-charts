@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {  Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Label } from 'ng2-charts';
 import { interval, Observable, of, Subscription, zip } from 'rxjs';
-import { groupBy, map, mergeMap, toArray } from 'rxjs/operators';
+import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 import { Order } from 'src/app/order/order';
 import { OrderService } from 'src/app/order/order.service';
 import { IObjectKeys } from 'src/app/shared/interfaces/layout';
@@ -16,7 +16,7 @@ class PaymentCount implements IObjectKeys {
   templateUrl: './order-bar-chart.component.html',
   styleUrls: ['./order-bar-chart.component.scss']
 })
-export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy {
+export class OrderBarChartComponent implements OnInit, OnDestroy {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -34,7 +34,9 @@ export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy 
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
-  public barChartColors: any[] = [];
+  public barChartColors: any[] = [{
+    backgroundColor: []
+  }];
   public barChartData: ChartDataSets[] = [{
     label: "Total Payment Mode Count",
     data: [],
@@ -42,22 +44,21 @@ export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy 
   subscription!: Subscription
 
   constructor(private orderService: OrderService) {
-    this.getDataSource();
-    this.subscription = interval(1000).subscribe({
-      next: () => this.getDataSource()
-    });
+
   }
+
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
-  ngAfterViewInit(): void {
 
-  }
 
   private orders: Order[] = [];
 
   ngOnInit() {
-
+    this.getDataSource();
+    this.subscription = interval(1000).subscribe({
+      next: () => this.getDataSource()
+    });
   }
 
   getColors(): any[] {

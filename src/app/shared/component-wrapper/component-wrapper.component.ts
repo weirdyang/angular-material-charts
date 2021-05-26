@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewInit, Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewInit, Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { WrapperDirective } from '../wrapper.directive';
 
@@ -7,24 +7,15 @@ import { WrapperDirective } from '../wrapper.directive';
   templateUrl: './component-wrapper.component.html',
   styleUrls: ['./component-wrapper.component.scss'],
 })
-export class ComponentWrapperComponent implements OnInit, AfterViewInit, AfterContentChecked {
+export class ComponentWrapperComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   @Input() item?: any;
-  @ViewChild(WrapperDirective, { static: false }) pageHost!: WrapperDirective;
+  @ViewChild(WrapperDirective, { static: true }) pageHost!: WrapperDirective;
   subscription: Subscription = new Subscription;
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
-  ngAfterContentChecked(): void {
-
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
-
-  ngOnInit() {
-    if (this.item == undefined) {
-      console.error('Item undefined');
-      return
-    }
-
-
-  }
-  ngAfterViewInit() {
+  ngAfterContentInit(): void {
     if (this.pageHost) {
       // The container already exists
       this.addComponent();
@@ -36,6 +27,16 @@ export class ComponentWrapperComponent implements OnInit, AfterViewInit, AfterCo
           complete: () => console.log('completed loading')
         });
     }
+  }
+
+  ngOnInit() {
+    if (this.item == undefined) {
+      console.error('Item undefined');
+      return
+    }
+  }
+  ngAfterViewInit() {
+
   }
 
   private addComponent() {
