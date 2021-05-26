@@ -37,6 +37,8 @@ export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContent
     const newView: [number, number] = [this.container.nativeElement.offsetWidth, 300];
     this.view = newView;
 
+    const test = of(this.container).subscribe((ele) => console.log(ele.nativeElement.offsetWidth));
+
   }
   ngAfterContentInit(): void {
 
