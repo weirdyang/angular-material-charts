@@ -46,13 +46,15 @@ export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy 
     this.subscription?.unsubscribe();
   }
   ngAfterViewInit(): void {
-    this.getDataSource();
+    this.subscription = interval(1000).subscribe({
+      next: () => this.getDataSource()
+    });
   }
 
   private orders: Order[] = [];
 
   ngOnInit() {
-
+    this.getDataSource();
   }
 
   getColors(): any[] {
@@ -107,9 +109,6 @@ export class OrderBarChartComponent implements OnInit, AfterViewInit, OnDestroy 
           }]
           this.barChartLabels = labels;
           this.barChartColors = this.getColors();
-          this.subscription = interval(1000).subscribe({
-            next: () => this.getDataSource()
-          })
         }
       });
   }
