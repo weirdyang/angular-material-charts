@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NewOrderTableComponent } from './new-order-table/new-order-table.component';
+import { OrderRoutingModule } from './order-routing,module';
 
 
 
@@ -32,6 +33,7 @@ import { NewOrderTableComponent } from './new-order-table/new-order-table.compon
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
+    OrderRoutingModule
   ]
 })
 export class OrderDashModule { }

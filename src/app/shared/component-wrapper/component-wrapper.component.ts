@@ -9,6 +9,8 @@ import { WrapperDirective } from '../wrapper.directive';
 })
 export class ComponentWrapperComponent implements OnInit {
   @Input() item?: any;
+  // https://stackoverflow.com/questions/56359504/how-should-i-use-the-new-static-option-for-viewchild-in-angular-8
+
   @ViewChild(WrapperDirective, { static: true }) pageHost!: WrapperDirective;
   subscription: Subscription = new Subscription;
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }

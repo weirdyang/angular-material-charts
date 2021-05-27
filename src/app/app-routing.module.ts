@@ -8,17 +8,21 @@ import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   {
-    path: '', component: WelcomeComponent
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full',
+    component: WelcomeComponent
   },
   {
-    path: 'dashboard', component: DashboardComponent
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
-    path: 'orders', component: OrderDashComponent
+    path: 'orders', loadChildren: () => import('./order/order-dash/order-dash.module').then(m => m.OrderDashModule)
   },
   {
-    path: 'products', component: ProductDashboardComponent
-  }
+    path: 'products', loadChildren: () => import('./products/product.module').then(m => m.ProductModule)
+  },
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { ContentObserver } from '@angular/cdk/observers';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { colorSets, MultiSeries, Color } from '@swimlane/ngx-charts';
 import { interval, Subscription } from 'rxjs';
 import { defaultColor } from '../config';
@@ -25,7 +25,7 @@ export class ProductStackedBarComponent implements OnInit {
   colorScheme?: Color;
   subscription!: Subscription;
   machineNames = ['Machine A', 'Machine B', 'Machine C'];
-  constructor() {
+  constructor(private ngZone: NgZone) {
     this.multi = this.getData();
     this.setColorScheme(defaultColor);
   }
