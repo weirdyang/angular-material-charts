@@ -14,6 +14,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
 import { WrapperDirective } from '../shared/wrapper.directive';
 import { SharedModule } from '../shared/shared.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,15 +26,10 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     DashboardChartModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatListModule,
-    MatGridListModule,
-    MatPaginatorModule,
     MatChipsModule,
     MatSortModule,
-    MatTableModule,
     SharedModule,
+    DashboardRoutingModule,
   ],
   exports: [
     DashboardChartModule,

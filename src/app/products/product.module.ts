@@ -19,6 +19,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import { ProductStackedBarComponent } from './product-stacked-bar/product-stacked-bar.component';
 import { LightStatusComponent } from './light-status/light-status.component';
+import { ProductRoutingModule } from './product-routing.module';
 
 
 
@@ -35,17 +36,10 @@ import { LightStatusComponent } from './light-status/light-status.component';
   ],
   imports: [
     SharedModule,
-    CommonModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    LayoutModule,
     NgxChartsModule,
-    BrowserAnimationsModule,
     MatSliderModule,
-    FormsModule
+    FormsModule,
+    ProductRoutingModule
   ]
 })
 export class ProductModule { }

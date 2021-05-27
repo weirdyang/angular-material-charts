@@ -11,7 +11,7 @@ import { Order } from './order';
 
 export class OrderService {
   private ordersUrl = 'api/order/orders.json';
-
+  
   constructor(private http: HttpClient) { }
 
   getOrders(offset: number, pageSize?: number, sortField?: string, sortDirection?: string): Observable<Order[]> {
