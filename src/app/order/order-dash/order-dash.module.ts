@@ -29,10 +29,6 @@ import { OrderRoutingModule } from './order-routing,module';
     CommonModule,
     ChartsModule,
     SharedModule,
-    MatGridListModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
     OrderRoutingModule
   ]
 })

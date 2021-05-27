@@ -36,13 +36,6 @@ import { ProductRoutingModule } from './product-routing.module';
   ],
   imports: [
     SharedModule,
-    CommonModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    LayoutModule,
     NgxChartsModule,
     MatSliderModule,
     FormsModule,
