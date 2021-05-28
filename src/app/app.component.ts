@@ -6,7 +6,7 @@ import { ThemeService } from './core/services/theme.service';
   selector: 'cd-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class AppComponent {
   isDarkTheme = this.themeService.isDarkTheme;
