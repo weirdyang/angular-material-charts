@@ -27,6 +27,8 @@ export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContent
   colorScheme: any;
   subscription!: Subscription;
   view: [number, number] | undefined;
+
+
   constructor(private orderService: OrderService) {
     this.setColorScheme(defaultColor);
 
@@ -44,7 +46,6 @@ export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContent
   ngOnInit(): void {
     this.subscription = interval(1000)
       .pipe(
-        tap(x => console.log(x)),
         switchMap(val => this.getDataSource())
       ).subscribe(result => this.single = [...result]);
   }
@@ -55,7 +56,7 @@ export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContent
     console.log(event);
   }
   getDataSource() {
-    const data: any[] = [];
+
     return this.orderService.getRandomOrders(10)
       .pipe(
         mergeMap(res => res),

@@ -1,19 +1,15 @@
-import { ContentObserver } from '@angular/cdk/observers';
-import { Component, OnInit } from '@angular/core';
-import { colorSets, MultiSeries, Color } from '@swimlane/ngx-charts';
-import { interval, Subscription } from 'rxjs';
-import { defaultColor } from '../config';
-enum Status {
-  Up = "Up",
-  Down = "Down",
-  Stop = "Off",
-}
+import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Status } from '../config';
+import { FakerService } from '../services/faker.service';
+
+
 @Component({
   selector: 'cd-light-status',
   templateUrl: './light-status.component.html',
   styleUrls: ['./light-status.component.scss']
 })
-export class LightStatusComponent implements OnInit {
+export class LightStatusComponent implements OnInit, OnDestroy, AfterContentInit {
   multi!: any[];
   // options
   showXAxis: boolean = true;
@@ -32,114 +28,29 @@ export class LightStatusComponent implements OnInit {
   subscription!: Subscription;
   status = [Status.Up, Status.Stop, Status.Down];
 
-  maxLength: number = 100;
-  constructor() {
-    this.multi = this.getData();
+  newLightStatus$ = this.fakerService.newLightStatus$
+    .subscribe((val) => this.multi = [...this.multi, val]);
 
+  maxLength: number = 100;
+
+  constructor(private fakerService: FakerService) { }
+  ngAfterContentInit(): void {
+    this.fakerService.generateFakeLightStatus();
+    this.fakerService.startFakeLightStatusStream();
+  }
+  ngOnDestroy(): void {
+    this.fakerService.stopFakeLightStatusGeneration();
   }
   formatDate(date: string) {
     const monday = new Date(date);
     return monday.getSeconds();
   }
   ngOnInit(): void {
-    this.subscription = interval(1500).subscribe(() => this.multi = this.updateData());
+    this.multi = this.fakerService.getData();
   }
 
-  updateData(): MultiSeries {
-    const currentDate = new Date(this.seed,
-      Math.floor(Math.random() * 12),
-      Math.floor(Math.random() * 30),
-      Math.floor(Math.random() * 24),
-      Math.floor(Math.random() * 60),
-      Math.floor(Math.random() * 60))
-
-    if (this.multi.length > this.maxLength)
-      this.multi.shift()
-
-    const newEntry = {
-      name: currentDate.toLocaleString(),
-      series: [
-        {
-          name: Status.Up,
-          value: 0,
-        },
-        {
-          name: Status.Stop,
-          value: 0,
-        },
-        {
-          name: Status.Down,
-          value: 0,
-        }
-      ]
-    }
-    const index = Math.floor(Math.random() * 3);
-    newEntry.series[index].value = 1;
-    this.seed += 1;
-
-    return [...this.multi, newEntry];
-  }
   onSelect(event: any) {
     console.log(event);
   }
-  getData(): MultiSeries {
 
-    const first = new Date(2011, 10, 30, 1, 10, 10).toLocaleString();
-    const second = new Date(2012, 10, 30, 1, 11, 10).toLocaleString();
-    const third = new Date(2013, 10, 30, 1, 12, 10).toLocaleString();
-    return [
-      {
-        "name": first,
-        "series": [
-          {
-            "name": Status.Up,
-            "value": 1
-          },
-          {
-            "name": Status.Stop,
-            "value": 0
-          },
-          {
-            "name": Status.Down,
-            "value": 0
-          }
-        ]
-      },
-
-      {
-        "name": second,
-        "series": [
-          {
-            "name": Status.Up,
-            "value": 0
-          },
-          {
-            "name": Status.Stop,
-            "value": 1
-          },
-          {
-            "name": Status.Down,
-            "value": 0
-          }
-        ]
-      },
-
-      {
-        "name": third,
-        "series": [
-          {
-            "name": Status.Up,
-            "value": 1
-          },
-          {
-            "name": Status.Stop,
-            "value": 0
-          },
-          {
-            "name": Status.Down,
-            "value": 0
-          }
-        ]
-      }]
-  }
 }
