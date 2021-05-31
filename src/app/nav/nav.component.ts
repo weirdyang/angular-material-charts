@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { HandsetService } from '../core/services/handset.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, AfterContentInit {
   menuItems = ['dashboard', 'sales', 'orders', 'customers', 'products'];
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -25,9 +25,12 @@ export class NavComponent implements OnInit {
     private handsetService: HandsetService) {
 
   }
+  ngAfterContentInit(): void {
+    this.isHandset$.subscribe((val) => this.handsetService.setHandset(val))
+  }
   ngOnInit() {
     this.isDarkTheme$ = this.themeService.isDarkTheme;
-    this.isHandset$.subscribe((val) => this.handsetService.setHandset(val))
+
   }
   toggleDarkTheme(checked: boolean) {
     this.themeService.setDarkTheme(checked);

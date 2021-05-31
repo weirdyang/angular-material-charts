@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HandsetService {
-  private _isHandset = new BehaviorSubject<boolean>(false);
-  isHandset = this._isHandset.asObservable();
+  private _isHandset = new Subject<boolean>();
+  isHandset = this._isHandset.asObservable().pipe(shareReplay(1));
 
   constructor() { }
 

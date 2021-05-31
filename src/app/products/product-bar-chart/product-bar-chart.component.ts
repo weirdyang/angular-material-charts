@@ -1,6 +1,6 @@
 import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild, } from '@angular/core';
 import { colorSets } from '@swimlane/ngx-charts';
-import { groupBy, mergeMap, toArray } from 'rxjs/operators';
+import { groupBy, map, mergeMap, switchMap, tap, toArray } from 'rxjs/operators';
 import { OrderService } from 'src/app/order/order.service';
 import { defaultColor } from '../config';
 import { interval, of, Subscription, zip } from 'rxjs';
@@ -42,10 +42,11 @@ export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContent
 
 
   ngOnInit(): void {
-    this.getDataSource();
-    this.subscription = interval(1000).subscribe({
-      next: () => this.getDataSource()
-    })
+    this.subscription = interval(1000)
+      .pipe(
+        tap(x => console.log(x)),
+        switchMap(val => this.getDataSource())
+      ).subscribe(result => this.single = [...result]);
   }
   setColorScheme(name: string) {
     this.colorScheme = colorSets.find(s => s.name === name);
@@ -55,18 +56,14 @@ export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContent
   }
   getDataSource() {
     const data: any[] = [];
-    this.orderService.getRandomOrders(10)
+    return this.orderService.getRandomOrders(10)
       .pipe(
         mergeMap(res => res),
         groupBy(order => order.paymentMode),
-        mergeMap(group => zip(of(group.key), group.pipe(toArray())))
-      ).subscribe({
-        next: (val) => {
-          data.push({ name: val[0], value: val[1].length })
-        },
-        error: console.error,
-        complete: () => this.single = [...data]
-      });
+        mergeMap(group => zip(of(group.key), group.pipe(toArray()))),
+        map(item => ({ name: item[0], value: item[1].length })),
+        toArray(),
+      )
   }
   groupByProperty(prop: string, array: any[]) {
     return array.reduce((acc, value) => {
