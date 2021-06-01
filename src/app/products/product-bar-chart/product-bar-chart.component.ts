@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild, } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { colorSets } from '@swimlane/ngx-charts';
 import { groupBy, map, mergeMap, switchMap, tap, toArray } from 'rxjs/operators';
 import { OrderService } from 'src/app/order/order.service';
@@ -14,7 +14,7 @@ import { interval, of, Subscription, zip } from 'rxjs';
   styleUrls: ['./product-bar-chart.component.scss']
 })
 
-export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContentInit {
+export class ProductBarChartComponent implements OnInit, OnDestroy {
   single: any[] = [];
   showXAxis = true;
   showYAxis = true;
@@ -32,10 +32,6 @@ export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContent
   constructor(private orderService: OrderService) {
     this.setColorScheme(defaultColor);
 
-  }
-
-
-  ngAfterContentInit(): void {
   }
 
   ngOnDestroy(): void {
@@ -65,14 +61,6 @@ export class ProductBarChartComponent implements OnInit, OnDestroy, AfterContent
         map(item => ({ name: item[0], value: item[1].length })),
         toArray(),
       )
-  }
-  groupByProperty(prop: string, array: any[]) {
-    return array.reduce((acc, value) => {
-      if (!acc[value[prop]]) {
-        acc[value[prop]] = [];
-      }
-      acc[prop].push(value);
-    }, {})
   }
 }
 

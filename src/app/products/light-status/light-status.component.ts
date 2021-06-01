@@ -37,6 +37,7 @@ export class LightStatusComponent implements OnInit, OnDestroy, AfterContentInit
   ngAfterContentInit(): void {
     this.fakerService.generateFakeLightStatus();
     this.fakerService.startFakeLightStatusStream();
+
   }
   ngOnDestroy(): void {
     this.fakerService.stopFakeLightStatusGeneration();

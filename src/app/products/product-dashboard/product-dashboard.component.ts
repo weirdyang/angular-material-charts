@@ -39,23 +39,23 @@ export class ProductDashboardComponent {
       if (matches) {
         return {
           columns: 1,
-          miniCard: { cols: 1, rows: 2, data: [{ title: "Light status", component: LightStatusComponent }] },
-          chart: {
+          top: { cols: 1, rows: 2, data: [{ title: "Light status", component: LightStatusComponent }] },
+          middle: {
             cols: 1, rows: 2, data:
               this.chartSetup
           },
-          table: { cols: 1, rows: 4, data: [{ title: "Machine Output", component: RevenueCalculatorComponent }] },
+          bottom: { cols: 1, rows: 4, data: [{ title: "Machine Output", component: RevenueCalculatorComponent }] },
         };
       }
 
       return {
         columns: 4,
-        miniCard: { cols: 4, rows: 2, data: [{ title: "Light status", component: LightStatusComponent }] },
-        chart: {
+        top: { cols: 4, rows: 2, data: [{ title: "Light status", component: LightStatusComponent }] },
+        middle: {
           cols: 2, rows: 2, data:
             this.chartSetup
         },
-        table: { cols: 4, rows: 4, data: [{ title: 'Machine Output', component: RevenueCalculatorComponent }] },
+        bottom: { cols: 4, rows: 4, data: [{ title: 'Machine Output', component: RevenueCalculatorComponent }] },
       };
     })
   );

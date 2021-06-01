@@ -21,8 +21,8 @@ export class OrderDashComponent {
       if (matches) {
         return {
           columns: 1,
-          miniCard: { cols: 1, rows: 1, data: [1, 2, 3, 4] },
-          chart: {
+          top: { cols: 1, rows: 1, data: [1, 2, 3, 4] },
+          middle: {
             cols: 1, rows: 2, data:
               [{
                 title: 'Annual Sales',
@@ -41,14 +41,14 @@ export class OrderDashComponent {
                 component: OrderPieChartComponent
               }]
           },
-          table: { cols: 1, rows: 4, data: [{title: "Latest 10 Orders", component: NewOrderTableComponent}] },
+          bottom: { cols: 1, rows: 4, data: [{title: "Latest 10 Orders", component: NewOrderTableComponent}] },
         };
       }
 
       return {
         columns: 4,
-        miniCard: { cols: 1, rows: 1, data: [1, 2, 3, 4] },
-        chart: {
+        top: { cols: 1, rows: 1, data: [1, 2, 3, 4] },
+        middle: {
           cols: 2, rows: 2, data:
             [{
               title: 'Annual Sales',
@@ -67,7 +67,7 @@ export class OrderDashComponent {
               component: OrderPieChartComponent
             }],
         },
-        table: { cols: 4, rows: 4, data: [NewOrderTableComponent] },
+        bottom: { cols: 4, rows: 4, data: [NewOrderTableComponent] },
       };
     })
   );

@@ -42,7 +42,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MatCardModule,
     MatMenuModule,
     HttpClientModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

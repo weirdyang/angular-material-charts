@@ -4,8 +4,8 @@
     rowHeight="200px">
     <!-- Cards -->
     <mat-grid-tile *ngFor="let mc of miniCardData"
-      [colspan]="( cardLayout | async )?.miniCard?.cols"
-      [rowspan]="( cardLayout | async )?.miniCard?.rows">
+      [colspan]="( cardLayout | async )?.top?.cols"
+      [rowspan]="( cardLayout | async )?.top?.rows">
       <cd-mini-card [icon]="mc.icon"
         [title]="mc.title"
         [value]="mc.value"
@@ -16,16 +16,16 @@
         [isCurrency]="mc. isCurrency"></cd-mini-card>
     </mat-grid-tile>
     <!--Charts-->
-    <mat-grid-tile *ngFor="let mc of ( cardLayout | async )?.chart?.data"
-      [colspan]="( cardLayout | async )?.chart?.cols"
-      [rowspan]="( cardLayout | async )?.chart?.rows">
+    <mat-grid-tile *ngFor="let mc of ( cardLayout | async )?.middle?.data"
+      [colspan]="( cardLayout | async )?.middle?.cols"
+      [rowspan]="( cardLayout | async )?.middle?.rows">
       <cd-card [title]="mc.title">
         <cd-component-wrapper [item]="mc.component"></cd-component-wrapper>
       </cd-card>
     </mat-grid-tile>
     <!-- Tables -->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols"
-      [rowspan]="( cardLayout | async )?.table?.rows">
+    <mat-grid-tile [colspan]="( cardLayout | async )?.bottom?.cols"
+      [rowspan]="( cardLayout | async )?.bottom?.rows">
       <cd-card title="Latest Orders">
         <cd-orders-table></cd-orders-table>
       </cd-card>
