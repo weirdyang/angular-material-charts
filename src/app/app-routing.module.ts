@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SignalrGuard } from './experiment/signalr.guard';
 import { OrderDashComponent } from './order/order-dash/order-dash.component';
 import { ProductDashboardComponent } from './products/product-dashboard/product-dashboard.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -23,7 +24,12 @@ const routes: Routes = [
   {
     path: 'products', loadChildren: () => import('./products/product.module').then(m => m.ProductModule)
   },
-  { path: 'experiment', loadChildren: () => import('./experiment/experiment.module').then(m => m.ExperimentModule) },
+  {
+    path: 'experiment',
+    loadChildren: () => import('./experiment/experiment.module').then(m => m.ExperimentModule),
+    canLoad: [SignalrGuard],
+    canDeactivate: [SignalrGuard]
+  },
 ];
 
 @NgModule({

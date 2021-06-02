@@ -42,29 +42,35 @@ export class CalculationService {
   }
 
   // https://www.jerriepelser.com/blog/automatic-reconnects-signalr/
-  public startConnection = () => {
+  public startConnection = async () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Trace)
       .withUrl(environment.calculationHubUrl)
       .withAutomaticReconnect()
       .build();
-    this.hubConnection
-      .start()
-      .then(() => {
-        this.hasRemoteConnection = true;
-        console.log('connected');
-        this.registerSignalEvents();
-
-      })
-      .catch((err) => {
-        this.hasRemoteConnection = false;
-        console.log(err)
-        setTimeout(() => {
-          this.startConnection();
-        }, 30000);
-      });
+    try {
+      await this.hubConnection.start();
+      this.registerSignalEvents();
+      this.hasRemoteConnection = true;
+    } catch (error) {
+      this.hasRemoteConnection = false;
+      console.log(error)
+      setTimeout(() => {
+        this.startConnection();
+      }, 30000);
+    }
+    return this.hasRemoteConnection;
   };
-
+  public stopConnection = async () => {
+    try {
+      await this.hubConnection.stop();
+      this.hasRemoteConnection = false;
+      return true;
+    } catch (error) {
+      console.log(error)
+      return false;
+    }
+  }
   public getNewTotals() {
     if (!this.hasRemoteConnection)
       return;

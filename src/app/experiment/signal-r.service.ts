@@ -2,6 +2,7 @@
 import { Injectable, NgZone, OnDestroy } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ExperimentModule } from './experiment.module';
 import { TestDocument } from './test-document';
 
@@ -57,26 +58,37 @@ export class SignalRService implements OnDestroy {
 
   }
   // https://www.jerriepelser.com/blog/automatic-reconnects-signalr/
-  public startConnection = () => {
+  public startConnection = async () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Debug)
-      .withUrl('https://localhost:5001/hubs/mysqltest')
+      .withUrl(environment.testDocumentUrl)
       .withAutomaticReconnect()
       .build();
-    this.hubConnection
-      .start()
-      .then(() => {
-        this.hasRemoteConnection = true;
-        this.registerSignalEvents();
-      })
-      .catch((err) => {
-        this.hasRemoteConnection = false;
-        console.log(err)
-        setTimeout(() => {
-          this.startConnection();
-        }, 30000);
-      });
+
+    try {
+      await this.hubConnection.start();
+      this.registerSignalEvents();
+      this.hasRemoteConnection = true;
+    } catch (error) {
+      this.hasRemoteConnection = false;
+      console.log(error)
+      setTimeout(() => {
+        this.startConnection();
+      }, 30000);
+    }
+    return this.hasRemoteConnection;
   };
+
+  public stopConnection = async () => {
+    try {
+      await this.hubConnection.stop();
+      this.hasRemoteConnection = false;
+      return true;
+    } catch (error) {
+      console.log(error)
+      return false;
+    }
+  }
 }
 
 
