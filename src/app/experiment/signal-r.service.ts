@@ -52,18 +52,18 @@ export class SignalRService implements OnDestroy {
   private hubConnection!: signalR.HubConnection;
 
   constructor(private ngZone: NgZone) {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .configureLogging(signalR.LogLevel.Debug)
+      .withUrl(environment.testDocumentUrl)
+      .withAutomaticReconnect()
+      .build();
 
   }
   ngOnDestroy(): void {
 
   }
   // https://www.jerriepelser.com/blog/automatic-reconnects-signalr/
-  public startConnection = async () => {
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Debug)
-      .withUrl(environment.testDocumentUrl)
-      .withAutomaticReconnect()
-      .build();
+  public startConnection = async (retries: number = 5, interval: number = 3000 ) => {
 
     try {
       await this.hubConnection.start();
@@ -74,7 +74,7 @@ export class SignalRService implements OnDestroy {
       console.log(error)
       setTimeout(() => {
         this.startConnection();
-      }, 30000);
+      }, interval);
     }
     return this.hasRemoteConnection;
   };

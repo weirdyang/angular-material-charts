@@ -38,16 +38,16 @@ export class CalculationService {
   private hubConnection!: signalR.HubConnection;
 
   constructor(private ngZone: NgZone) {
-
-  }
-
-  // https://www.jerriepelser.com/blog/automatic-reconnects-signalr/
-  public startConnection = async () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Trace)
       .withUrl(environment.calculationHubUrl)
       .withAutomaticReconnect()
       .build();
+  }
+
+  // https://www.jerriepelser.com/blog/automatic-reconnects-signalr/
+  public startConnection = async () => {
+
     try {
       await this.hubConnection.start();
       this.registerSignalEvents();
