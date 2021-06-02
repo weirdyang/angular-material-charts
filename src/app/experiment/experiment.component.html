@@ -1,1 +1,33 @@
-<cd-portal-outlet [item]="testComponent"></cd-portal-outlet>
+<main>
+    <div class="alert alert-danger"
+        *ngIf="errorMessage$ | async as errorMessage">
+        {{ errorMessage }}
+    </div>
+
+
+    <div class="alert alert-danger"
+        *ngIf="created$ | async as created">
+        {{ created.name}}
+    </div>
+    <div class="alert alert-danger"
+        *ngIf="updated$ | async as updated">
+        {{ updated.name}}
+    </div>
+
+    <div class="alert alert-danger"
+        *ngIf="deleted$ | async as deleted">
+        {{ deleted.name}}
+    </div>
+
+    <div class="alert alert-danger"
+        *ngIf="total$ | async as total">
+        {{ total }}
+    </div>
+
+    <div class="alert alert-danger"
+        *ngIf="unique$ | async as unique">
+        {{ unique }}
+    </div>
+
+
+</main>

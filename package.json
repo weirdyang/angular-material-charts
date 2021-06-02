@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~11.2.5",
     "@angular/platform-browser-dynamic": "~11.2.5",
     "@angular/router": "~11.2.5",
+    "@microsoft/signalr": "^5.0.6",
     "@swimlane/ngx-charts": "^18.0.1",
     "chart.js": "^2.9.3",
     "ng2-charts": "^2.3.0",

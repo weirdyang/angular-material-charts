@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  calculationHubUrl: "https://localhost:5001/hubs/calculations",
+  testDocumentUrl: "https://localhost:5001/hubs/mysqltest"
 };
 
 /*

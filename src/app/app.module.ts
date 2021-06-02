@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +23,10 @@ import { OrderDashModule } from './order/order-dash/order-dash.module';
 import { ProductModule } from './products/product.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ExperimentComponent } from './experiment/experiment.component';
+import { ExperimentModule } from './experiment/experiment.module';
+import { SignalRService } from './experiment/signal-r.service';
+import { CalculationService } from './experiment/calculation.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,8 +47,23 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MatMenuModule,
     HttpClientModule,
     MatSlideToggleModule,
+    ExperimentModule,
   ],
-  providers: [],
+  providers:
+  [SignalRService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (signal: SignalRService) => () => signal.startConnection(),
+      deps: [SignalRService],
+      multi: true,
+    },
+    CalculationService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (calc: CalculationService) => () => calc.startConnection(),
+      deps: [CalculationService],
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
