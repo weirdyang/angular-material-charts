@@ -9,8 +9,7 @@ import { ThemeService } from './core/services/theme.service';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class AppComponent {
-  isDarkTheme = this.themeService.isDarkTheme;
-  isHandset = this.handsetService.isHandset;
+  isDarkTheme$ = this.themeService.isDarkTheme;
 
   constructor(private themeService: ThemeService, private handsetService: HandsetService) { }
 

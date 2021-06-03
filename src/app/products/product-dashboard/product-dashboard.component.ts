@@ -34,28 +34,32 @@ export class ProductDashboardComponent {
     title: 'Production Hours',
     component: ProductNumberCardComponent
   }]
-  cardLayout: Observable<LayoutContainer> = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).pipe(
+
+  lightStatus = [{ title: "Light status", component: LightStatusComponent }]
+
+  revenueCalculator = [{ title: 'Machine Output', component: RevenueCalculatorComponent }]
+  cardLayout: Observable<LayoutContainer> = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet, Breakpoints.Medium]).pipe(
     map(({ matches }) => {
       if (matches) {
         return {
           columns: 1,
-          top: { cols: 1, rows: 2, data: [{ title: "Light status", component: LightStatusComponent }] },
+          top: { cols: 1, rows: 2, data: this.lightStatus },
           middle: {
             cols: 1, rows: 2, data:
               this.chartSetup
           },
-          bottom: { cols: 1, rows: 4, data: [{ title: "Machine Output", component: RevenueCalculatorComponent }] },
+          bottom: { cols: 1, rows: 4, data: this.revenueCalculator },
         };
       }
 
       return {
         columns: 4,
-        top: { cols: 4, rows: 2, data: [{ title: "Light status", component: LightStatusComponent }] },
+        top: { cols: 4, rows: 2, data: this.lightStatus },
         middle: {
           cols: 2, rows: 2, data:
             this.chartSetup
         },
-        bottom: { cols: 4, rows: 4, data: [{ title: 'Machine Output', component: RevenueCalculatorComponent }] },
+        bottom: { cols: 4, rows: 4, data: this.revenueCalculator },
       };
     })
   );
